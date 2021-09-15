@@ -20,6 +20,11 @@ export const links = [
     href: "/",
   },
   {
+    label: "PriceIcon",
+    icon: "PriceIcon",
+    href: "/",
+  },
+  {
     label: "DocsIcon",
     icon: "DocsIcon",
     href: "/",
@@ -92,7 +97,7 @@ export const socials = [
   {
     label: "Github",
     icon: "GithubIcon",
-    href: "https://twitter.com/stroopwafelfinance",
+    href: "https://github.com/stroopwafelfinance",
   },
 
 

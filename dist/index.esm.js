@@ -46,10 +46,14 @@ function __rest(s, e) {
     return t;
 }
 
-function __spreadArray(to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 }
 
 function __makeTemplateObject(cooked, raw) {
@@ -205,9 +209,7 @@ var getOpacity = function (_a) {
     var _b = _a.$isLoading, $isLoading = _b === void 0 ? false : _b;
     return $isLoading ? ".5" : "1";
 };
-var StyledButton = styled.button(templateObject_1$M || (templateObject_1$M = __makeTemplateObject(["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n  }\n\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n  }\n\n  ", "\n  ",
-    "\n  ",
-    "\n  ", "\n  ", "\n"])), getOpacity, getDisabledStyles, variant$1({
+var StyledButton = styled.button(templateObject_1$M || (templateObject_1$M = __makeTemplateObject(["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n  }\n\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n  }\n\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n"])), getOpacity, getDisabledStyles, variant$1({
     prop: "scale",
     variants: scaleVariants$1,
 }), variant$1({
@@ -747,12 +749,12 @@ var StyledBreadcrumbs = styled.ul(templateObject_2$i || (templateObject_2$i = __
 var insertSeparators = function (items, separator) {
     return items.reduce(function (accum, item, index) {
         if (index === 0) {
-            return __spreadArray(__spreadArray([], accum), [item]);
+            return __spreadArray(__spreadArray([], accum, true), [item], false);
         }
-        return __spreadArray(__spreadArray([], accum), [
+        return __spreadArray(__spreadArray([], accum, true), [
             React.createElement(Separator, { "aria-hidden": true, key: "seperator-" + index }, separator),
             item,
-        ]);
+        ], false);
     }, []);
 };
 var DefaultSeparator = React.createElement(Icon$R, { color: "currentColor", width: "24px" });
@@ -984,7 +986,7 @@ var Bunny = styled.div(templateObject_2$g || (templateObject_2$g = __makeTemplat
 });
 var FallingBunnies = function (_a) {
     var _b = _a.count, count = _b === void 0 ? 30 : _b, _c = _a.size, size = _c === void 0 ? 32 : _c, _d = _a.iterations, iterations = _d === void 0 ? Infinity : _d, _e = _a.duration, duration = _e === void 0 ? 10 : _e;
-    var bunnies = __spreadArray([], Array(count)).map(function (_, index) { return (React.createElement(Bunny, { key: String(index), position: Math.random() * 100, iterations: iterations, duration: duration },
+    var bunnies = __spreadArray([], Array(count), true).map(function (_, index) { return (React.createElement(Bunny, { key: String(index), position: Math.random() * 100, iterations: iterations, duration: duration },
         React.createElement(Icon$J, { width: size, height: size }))); });
     return React.createElement("div", null, bunnies);
 };
@@ -1312,9 +1314,7 @@ var getOutlineStyles = function (_a) {
     }
     return "";
 };
-var StyledTag = styled.div(templateObject_1$o || (templateObject_1$o = __makeTemplateObject(["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ", "\n  ", "\n  ", "\n\n  ", "\n"], ["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ",
-    "\n  ",
-    "\n  ", "\n\n  ", "\n"])), variant$1({
+var StyledTag = styled.div(templateObject_1$o || (templateObject_1$o = __makeTemplateObject(["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ", "\n  ", "\n  ", "\n\n  ", "\n"], ["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ", "\n  ", "\n  ", "\n\n  ", "\n"])), variant$1({
     prop: "scale",
     variants: scaleVariants,
 }), variant$1({
@@ -1378,8 +1378,7 @@ var Bar = styled.div(templateObject_1$m || (templateObject_1$m = __makeTemplateO
 Bar.defaultProps = {
     primary: false,
 };
-var StyledProgress = styled.div(templateObject_2$d || (templateObject_2$d = __makeTemplateObject(["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  height: 16px;\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ", "\n  ", "\n"], ["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  height: 16px;\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ",
-    "\n  ", "\n"])), function (_a) {
+var StyledProgress = styled.div(templateObject_2$d || (templateObject_2$d = __makeTemplateObject(["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  height: 16px;\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ", "\n  ", "\n"], ["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  height: 16px;\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ", "\n  ", "\n"])), function (_a) {
     var theme = _a.theme;
     return theme.colors.input;
 }, function (_a) {
@@ -1593,7 +1592,7 @@ var byTextDescending = function (getTextProperty) { return function (objectA, ob
 
 var sortByColumn = function (data, sortColumn, columns) {
     var isAscending = null;
-    var sortedRows = __spreadArray([], data);
+    var sortedRows = __spreadArray([], data, true);
     columns.forEach(function (column) {
         // if the row was found
         if (sortColumn === column.name) {
@@ -1644,7 +1643,7 @@ var createReducer = function () { return function (state, action) {
     var rowIds = {};
     switch (action.type) {
         case "SET_ROWS":
-            rows = __spreadArray([], action.data);
+            rows = __spreadArray([], action.data, true);
             // preserve sorting if a sort is already enabled when data changes
             if (state.sortColumn) {
                 rows = sortByColumn(action.data, state.sortColumn, state.columns);
@@ -1866,7 +1865,7 @@ var useTable = function (columns, data, options) {
         return __spreadArray([], state.columns.map(function (column) {
             var label = column.label ? column.label : column.name;
             return __assign(__assign({}, column), { render: makeHeaderRender(label, column.headerRender) });
-        }));
+        }), true);
     }, [state.columns]);
     useEffect(function () {
         if (options && options.filter) {
@@ -2270,8 +2269,10 @@ var Icon$h = function (props) {
 };
 
 var Icon$g = function (props) {
-    return (React.createElement(Svg, __assign({ viewBox: "0 0 24 24" }, props),
-        React.createElement("path", { d: "M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM18.92 8H15.97C15.65 6.75 15.19 5.55 14.59 4.44C16.43 5.07 17.96 6.35 18.92 8ZM12 4.04C12.83 5.24 13.48 6.57 13.91 8H10.09C10.52 6.57 11.17 5.24 12 4.04ZM4.26 14C4.1 13.36 4 12.69 4 12C4 11.31 4.1 10.64 4.26 10H7.64C7.56 10.66 7.5 11.32 7.5 12C7.5 12.68 7.56 13.34 7.64 14H4.26ZM5.08 16H8.03C8.35 17.25 8.81 18.45 9.41 19.56C7.57 18.93 6.04 17.66 5.08 16ZM8.03 8H5.08C6.04 6.34 7.57 5.07 9.41 4.44C8.81 5.55 8.35 6.75 8.03 8ZM12 19.96C11.17 18.76 10.52 17.43 10.09 16H13.91C13.48 17.43 12.83 18.76 12 19.96ZM14.34 14H9.66C9.57 13.34 9.5 12.68 9.5 12C9.5 11.32 9.57 10.65 9.66 10H14.34C14.43 10.65 14.5 11.32 14.5 12C14.5 12.68 14.43 13.34 14.34 14ZM14.59 19.56C15.19 18.45 15.65 17.25 15.97 16H18.92C17.96 17.65 16.43 18.93 14.59 19.56ZM16.36 14C16.44 13.34 16.5 12.68 16.5 12C16.5 11.32 16.44 10.66 16.36 10H19.74C19.9 10.64 20 11.31 20 12C20 12.69 19.9 13.36 19.74 14H16.36Z" })));
+    return (React.createElement(Svg, __assign({ viewBox: "0 0 64 64" }, props),
+        React.createElement("path", { "data-name": "layer2", d: "M59 60h-2V20h-8v40h-6V30h-8v30h-6V40h-8v20h-6V50H7v10H5a2 2 0 0 0 0 4h54a2 2 0 0 0 0-4z", fill: "#EC9333" }),
+        React.createElement("path", { "data-name": "layer1", d: "M8 44a2 2 0 0 0 1.2-.4L53.6 8.5l-.5 5.3a2 2 0 0 0 1.8 2.2h.2a2 2 0 0 0 2-1.8l1.1-11.8L46.4 0a2 2 0 1 0-.8 4l5.8 1.2L6.8 40.4A2 2 0 0 0 8 44z", fill: "#EC9333" }),
+        "  "));
 };
 
 var Logo$2 = function (_a) {
@@ -2353,7 +2354,7 @@ var IconModule = /*#__PURE__*/Object.freeze({
     HomeIcon: Icon$j,
     AuditIcon: Icon$i,
     TimerIcon: Icon$h,
-    LanguageIcon: Icon$g,
+    PriceIcon: Icon$g,
     LogoIcon: Logo$3,
     GithubIcon: Icon$f,
     MoreIcon: Icon$e,
@@ -2421,6 +2422,11 @@ var links = [
     {
         label: "NftIcon",
         icon: "NftIcon",
+        href: "/",
+    },
+    {
+        label: "PriceIcon",
+        icon: "PriceIcon",
         href: "/",
     },
     {
@@ -2495,7 +2501,7 @@ var socials = [
     {
         label: "Github",
         icon: "GithubIcon",
-        href: "https://twitter.com/stroopwafelfinance",
+        href: "https://github.com/stroopwafelfinance",
     },
 ];
 var MENU_HEIGHT = 64;

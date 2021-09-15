@@ -5,7 +5,7 @@ export { default as HamburgerCloseIcon } from "./HamburgerClose";
 export { default as HomeIcon } from "./Home";
 export { default as AuditIcon } from "./Ifo";
 export { default as TimerIcon } from "./Info";
-export { default as LanguageIcon } from "./Language";
+export { default as PriceIcon } from "./Language";
 export { default as LogoIcon } from "./Logo";
 export { default as GithubIcon } from "./Moon";
 export { default as MoreIcon } from "./More";
