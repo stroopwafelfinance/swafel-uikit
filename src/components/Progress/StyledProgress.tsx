@@ -11,7 +11,10 @@ export const Bar = styled.div<BarProps>`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${(props) => (props.primary ? props.theme.colors.secondary : `${props.theme.colors.secondary}80`)};
+  background-color: ${(props) =>
+    props.primary
+      ? props.theme.colors.secondary
+      : `${props.theme.colors.secondary}80`};
   height: 16px;
   transition: width 200ms ease;
 `;
@@ -32,8 +35,10 @@ const StyledProgress = styled.div<StyledProgressProps>`
   overflow: hidden;
 
   ${Bar} {
-    border-top-left-radius: ${({ variant }) => (variant === variants.FLAT ? "0" : "32px")};
-    border-bottom-left-radius: ${({ variant }) => (variant === variants.FLAT ? "0" : "32px")};
+    border-top-left-radius: ${({ variant }) =>
+      variant === variants.FLAT ? "0" : "32px"};
+    border-bottom-left-radius: ${({ variant }) =>
+      variant === variants.FLAT ? "0" : "32px"};
   }
 
   ${StyledSystemVariant({

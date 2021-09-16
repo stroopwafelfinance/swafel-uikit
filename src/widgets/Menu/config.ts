@@ -86,7 +86,7 @@ export const socials = [
       {
         label: "English Chat",
         href: "https://t.me/StroopWafelChat",
-      }
+      },
     ],
   },
   {
@@ -99,8 +99,6 @@ export const socials = [
     icon: "GithubIcon",
     href: "https://github.com/stroopwafelfinance",
   },
-
-
 ];
 
 export const MENU_HEIGHT = 64;

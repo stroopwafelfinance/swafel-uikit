@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "../../../components/Button/Button";
-import {BrowserView, MobileView} from 'react-device-detect';
-
+import { BrowserView, MobileView } from "react-device-detect";
 
 const MenuButton = styled(Button)`
   color: ${({ theme }) => theme.colors.text};

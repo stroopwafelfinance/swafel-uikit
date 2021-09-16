@@ -5,7 +5,7 @@ import Flex from "../../../components/Box/Flex";
 import Button from "../../../components/Button/Button";
 import * as IconModule from "../icons";
 
-const Icons = (IconModule as unknown) as { [key: string]: React.FC<SvgProps> };
+const Icons = IconModule as unknown as { [key: string]: React.FC<SvgProps> };
 const { GithubIcon, PresaleIcon } = Icons;
 
 interface Props {
@@ -26,4 +26,7 @@ const ThemeSwitcher: React.FC<Props> = ({ isDark, toggleTheme }) => (
   </Button>
 );
 
-export default React.memo(ThemeSwitcher, (prev, next) => prev.isDark === next.isDark);
+export default React.memo(
+  ThemeSwitcher,
+  (prev, next) => prev.isDark === next.isDark
+);
