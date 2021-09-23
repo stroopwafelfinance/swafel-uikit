@@ -61,9 +61,11 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 }
 
-var getThemeValue = function (path, fallback) { return function (theme) {
-    return get(theme, path, fallback);
-}; };
+var getThemeValue = function (path, fallback) {
+    return function (theme) {
+        return get(theme, path, fallback);
+    };
+};
 
 var rotate = keyframes(templateObject_1$O || (templateObject_1$O = __makeTemplateObject(["\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n"], ["\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n"])));
 var spinStyle = css(templateObject_2$k || (templateObject_2$k = __makeTemplateObject(["\n  animation: ", " 2s linear infinite;\n"], ["\n  animation: ", " 2s linear infinite;\n"])), rotate);
@@ -713,10 +715,10 @@ var IconLabel = styled.div(templateObject_1$I || (templateObject_1$I = __makeTem
 var withHandlerSpacing = 32 + 12 + 8; // button size + inner spacing + handler position
 var Details = styled.div(templateObject_2$j || (templateObject_2$j = __makeTemplateObject(["\n  flex: 1;\n  padding-bottom: 12px;\n  padding-left: 12px;\n  padding-right: ", ";\n  padding-top: 12px;\n"], ["\n  flex: 1;\n  padding-bottom: 12px;\n  padding-left: 12px;\n  padding-right: ", ";\n  padding-top: 12px;\n"])), function (_a) {
     var hasHandler = _a.hasHandler;
-    return (hasHandler ? withHandlerSpacing + "px" : "12px");
+    return hasHandler ? withHandlerSpacing + "px" : "12px";
 });
 var CloseHandler = styled.div(templateObject_3$8 || (templateObject_3$8 = __makeTemplateObject(["\n  border-radius: 0 16px 16px 0;\n  right: 8px;\n  position: absolute;\n  top: 8px;\n"], ["\n  border-radius: 0 16px 16px 0;\n  right: 8px;\n  position: absolute;\n  top: 8px;\n"])));
-var StyledAlert = styled(Flex)(templateObject_4$4 || (templateObject_4$4 = __makeTemplateObject(["\n  position: relative;\n  background-color: ", ";\n  border-radius: 16px;\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);\n"], ["\n  position: relative;\n  background-color: ", ";\n  border-radius: 16px;\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);\n"])), function (_a) {
+var StyledAlert = styled(Flex)(templateObject_4$4 || (templateObject_4$4 = __makeTemplateObject(["\n  position: relative;\n  background-color: ", ";\n  border-radius: 16px;\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1),\n    0px 1px 1px rgba(0, 0, 0, 0.05);\n"], ["\n  position: relative;\n  background-color: ", ";\n  border-radius: 16px;\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1),\n    0px 1px 1px rgba(0, 0, 0, 0.05);\n"])), function (_a) {
     var theme = _a.theme;
     return theme.alert.background;
 });
@@ -728,7 +730,7 @@ var Alert = function (_a) {
             React.createElement(Icon, { color: "currentColor", width: "24px" })),
         React.createElement(Details, { hasHandler: !!onClick },
             React.createElement(Text, { bold: true }, title),
-            typeof children === "string" ? React.createElement(Text, { as: "p" }, children) : children),
+            typeof children === "string" ? (React.createElement(Text, { as: "p" }, children)) : (children)),
         onClick && (React.createElement(CloseHandler, null,
             React.createElement(IconButton, { scale: "sm", variant: "text", onClick: onClick },
                 React.createElement(Icon$P, { width: "24px", color: "currentColor" }))))));
@@ -760,7 +762,9 @@ var insertSeparators = function (items, separator) {
 var DefaultSeparator = React.createElement(Icon$R, { color: "currentColor", width: "24px" });
 var Breadcrumbs = function (_a) {
     var _b = _a.separator, separator = _b === void 0 ? DefaultSeparator : _b, children = _a.children;
-    var validItems = Children.toArray(children).filter(function (child) { return isValidElement(child); });
+    var validItems = Children.toArray(children).filter(function (child) {
+        return isValidElement(child);
+    });
     var items = insertSeparators(validItems, separator);
     return (React.createElement(StyledBreadcrumbs, null, items.map(function (item, index) { return (React.createElement("li", { key: "child-" + index }, item)); })));
 };
@@ -961,7 +965,7 @@ var Bunny = styled.div(templateObject_2$g || (templateObject_2$g = __makeTemplat
     return duration + "s";
 }, function (_a) {
     var iterations = _a.iterations;
-    return (Number.isFinite(iterations) ? String(iterations) : "infinite");
+    return Number.isFinite(iterations) ? String(iterations) : "infinite";
 }, function (_a) {
     var duration = _a.duration;
     return (duration / 10) * 1.3 + "s";
@@ -1058,7 +1062,7 @@ var Wrapper$1 = styled.div(templateObject_1$v || (templateObject_1$v = __makeTem
     return height;
 }, function (_a) {
     var width = _a.width, height = _a.height, responsive = _a.responsive;
-    return (responsive ? (height / width) * 100 : 0);
+    return responsive ? (height / width) * 100 : 0;
 }, space);
 var templateObject_1$v;
 
@@ -1199,7 +1203,9 @@ var Dot = styled.span(templateObject_2$e || (templateObject_2$e = __makeTemplate
 var NotificationDot = function (_a) {
     var _b = _a.show, show = _b === void 0 ? false : _b, children = _a.children, props = __rest(_a, ["show", "children"]);
     return (React.createElement(NotificationDotRoot, null,
-        Children.map(children, function (child) { return cloneElement(child, props); }),
+        Children.map(children, function (child) {
+            return cloneElement(child, props);
+        }),
         React.createElement(Dot, { show: show })));
 };
 var templateObject_1$q, templateObject_2$e;
@@ -1308,7 +1314,8 @@ var styleVariants$1 = (_b = {},
 var getOutlineStyles = function (_a) {
     var outline = _a.outline, theme = _a.theme, _b = _a.variant, variantKey = _b === void 0 ? variants$1.PRIMARY : _b;
     if (outline) {
-        var themeColorKey = styleVariants$1[variantKey].backgroundColor;
+        var themeColorKey = styleVariants$1[variantKey]
+            .backgroundColor;
         var color = theme.colors[themeColorKey];
         return "\n      color: " + color + ";\n      background: transparent;\n      border: 2px solid " + color + ";\n    ";
     }
@@ -1374,7 +1381,11 @@ var styleVariants = (_a$1 = {},
     },
     _a$1);
 
-var Bar = styled.div(templateObject_1$m || (templateObject_1$m = __makeTemplateObject(["\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: ", ";\n  height: 16px;\n  transition: width 200ms ease;\n"], ["\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: ", ";\n  height: 16px;\n  transition: width 200ms ease;\n"])), function (props) { return (props.primary ? props.theme.colors.secondary : props.theme.colors.secondary + "80"); });
+var Bar = styled.div(templateObject_1$m || (templateObject_1$m = __makeTemplateObject(["\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: ", ";\n  height: 16px;\n  transition: width 200ms ease;\n"], ["\n  position: absolute;\n  top: 0;\n  left: 0;\n  background-color: ", ";\n  height: 16px;\n  transition: width 200ms ease;\n"])), function (props) {
+    return props.primary
+        ? props.theme.colors.secondary
+        : props.theme.colors.secondary + "80";
+});
 Bar.defaultProps = {
     primary: false,
 };
@@ -1386,10 +1397,10 @@ var StyledProgress = styled.div(templateObject_2$d || (templateObject_2$d = __ma
     return theme.shadows.inset;
 }, Bar, function (_a) {
     var variant = _a.variant;
-    return (variant === variants.FLAT ? "0" : "32px");
+    return variant === variants.FLAT ? "0" : "32px";
 }, function (_a) {
     var variant = _a.variant;
-    return (variant === variants.FLAT ? "0" : "32px");
+    return variant === variants.FLAT ? "0" : "32px";
 }, variant$1({
     variants: styleVariants,
 }), space);
@@ -1413,7 +1424,7 @@ var Progress = function (_a) {
         showProgressBunny && (React.createElement(ProgressBunnyWrapper, { style: { left: stepGuard(primaryStep) + "%" } },
             React.createElement(Icon$x, null))),
         React.createElement(Bar, { primary: true, style: { width: stepGuard(primaryStep) + "%" } }),
-        secondaryStep ? React.createElement(Bar, { style: { width: stepGuard(secondaryStep) + "%" } }) : null));
+        secondaryStep ? (React.createElement(Bar, { style: { width: stepGuard(secondaryStep) + "%" } })) : null));
 };
 
 var bunnyHeadMain = "data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2232%22%20viewBox%3D%220%200%2024%2032%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20y%3D%2218%22%20width%3D%2217%22%20height%3D%2210%22%20fill%3D%22%231FC7D4%22%2F%3E%3Cpath%20d%3D%22M7.50675%2023.7056C6.14677%2025.0656%207.73758%2027.2292%209.75419%2029.2458C11.7708%2031.2624%2013.9344%2032.8532%2015.2944%2031.4933C16.6543%2030.1333%2015.9641%2027.0691%2013.9475%2025.0525C11.9309%2023.0359%208.86673%2022.3457%207.50675%2023.7056Z%22%20fill%3D%22%231FC7D4%22%2F%3E%3Cpath%20d%3D%22M13.507%2021.706C12.1463%2023.0666%2013.7379%2025.2313%2015.7555%2027.2489C17.7731%2029.2665%2019.9378%2030.8581%2021.2984%2029.4974C22.6591%2028.1368%2021.9685%2025.0711%2019.9509%2023.0535C17.9333%2021.0359%2014.8676%2020.3453%2013.507%2021.706Z%22%20fill%3D%22%231FC7D4%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M11.7694%205.63421C11.8457%206.02664%2011.9158%206.4375%2011.9836%206.85716C11.6151%206.85766%2011.2482%206.87522%2010.8839%206.90895C10.6029%206.29464%2010.2694%205.67199%209.88441%205.05277C7.39613%201.05079%205.06199%200.901096%202.98861%202.01265C0.915239%203.12421%200.810677%205.89597%203.28297%208.59188C3.57049%208.90541%203.86254%209.23841%204.15744%209.58036C1.66027%2011.5156%200%2014.291%200%2017.2695C0%2022.8292%205.78518%2024%2012%2024C18.2148%2024%2024%2022.8292%2024%2017.2695C24%2013.8488%2021.8101%2010.6958%2018.6776%208.77602C18.8852%207.81022%2019%206.74856%2019%205.63421C19%201.17171%2017.159%200%2014.888%200C12.6171%200%2011.1155%202.27116%2011.7694%205.63421Z%22%20fill%3D%22url%28%23paint0_linear%29%22%2F%3E%3Cpath%20d%3D%22M12.7284%2016.4446C12.796%2017.3149%2012.4446%2019.0556%2010.498%2019.0556%22%20stroke%3D%22%23452A7A%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M12.7457%2016.4446C12.6781%2017.3149%2013.0296%2019.0556%2014.9761%2019.0556%22%20stroke%3D%22%23452A7A%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9%2014.5C9%2015.6046%208.55228%2016%208%2016C7.44772%2016%207%2015.6046%207%2014.5C7%2013.3954%207.44772%2013%208%2013C8.55228%2013%209%2013.3954%209%2014.5Z%22%20fill%3D%22%23452A7A%22%2F%3E%3Cpath%20d%3D%22M18%2014.5C18%2015.6046%2017.5523%2016%2017%2016C16.4477%2016%2016%2015.6046%2016%2014.5C16%2013.3954%2016.4477%2013%2017%2013C17.5523%2013%2018%2013.3954%2018%2014.5Z%22%20fill%3D%22%23452A7A%22%2F%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22paint0_linear%22%20x1%3D%2212%22%20y1%3D%220%22%20x2%3D%2212%22%20y2%3D%2224%22%20gradientUnits%3D%22userSpaceOnUse%22%3E%3Cstop%20stop-color%3D%22%2353DEE9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231FC7D4%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E";
@@ -1429,13 +1440,13 @@ styled.img(templateObject_3$7 || (templateObject_3$7 = __makeTemplateObject(["\n
 var BunnySlider = styled.div(templateObject_4$3 || (templateObject_4$3 = __makeTemplateObject(["\n  position: absolute;\n  left: 14px;\n  width: 100%;\n"], ["\n  position: absolute;\n  left: 14px;\n  width: 100%;\n"])));
 var StyledInput = styled.input(templateObject_5$2 || (templateObject_5$2 = __makeTemplateObject(["\n  height: 32px;\n  position: relative;\n  cursor: pointer;\n\n  ::-webkit-slider-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transform: translate(-2px, -2px);\n    transition: 0.1s all;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n  ::-moz-range-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transition: 0.1s all;\n    transform: translate(-2px, -2px);\n    // custom moz reset\n    background-color: transparent;\n    border: 0;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n  ::-ms-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transform: translate(-2px, -2px);\n    transition: 0.1s all;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n"], ["\n  height: 32px;\n  position: relative;\n  cursor: pointer;\n\n  ::-webkit-slider-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transform: translate(-2px, -2px);\n    transition: 0.1s all;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n  ::-moz-range-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transition: 0.1s all;\n    transform: translate(-2px, -2px);\n    // custom moz reset\n    background-color: transparent;\n    border: 0;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n  ::-ms-thumb {\n    -webkit-appearance: none;\n    background-image: url(", ");\n    width: 24px;\n    height: 32px;\n    cursor: pointer;\n    transform: translate(-2px, -2px);\n    transition: 0.1s all;\n\n    :hover {\n      transform: scale(1.1) translate(-3px, -3px);\n    }\n  }\n"])), function (_a) {
     var isCurrentValueMaxValue = _a.isCurrentValueMaxValue;
-    return (isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain);
+    return isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain;
 }, function (_a) {
     var isCurrentValueMaxValue = _a.isCurrentValueMaxValue;
-    return (isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain);
+    return isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain;
 }, function (_a) {
     var isCurrentValueMaxValue = _a.isCurrentValueMaxValue;
-    return (isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain);
+    return isCurrentValueMaxValue ? bunnyHeadMax : bunnyHeadMain;
 });
 var BarBackground = styled.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  position: absolute;\n  width: 100%;\n  height: 2px;\n  top: 18px;\n  background-color: ", ";\n"], ["\n  position: absolute;\n  width: 100%;\n  height: 2px;\n  top: 18px;\n  background-color: ", ";\n"])), function (_a) {
     var theme = _a.theme;
@@ -1443,7 +1454,7 @@ var BarBackground = styled.div(templateObject_6 || (templateObject_6 = __makeTem
 });
 var BarProgress = styled.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n  position: absolute;\n  width: ", ";\n  height: 10px;\n  top: 18px;\n\n  background: ", ";\n"], ["\n  position: absolute;\n  width: ", ";\n  height: 10px;\n  top: 18px;\n\n  background: ", ";\n"])), function (_a) {
     var progress = _a.progress, isCurrentValueMaxValue = _a.isCurrentValueMaxValue;
-    return (isCurrentValueMaxValue ? "calc(100% - 16px)" : progress + "%");
+    return isCurrentValueMaxValue ? "calc(100% - 16px)" : progress + "%";
 }, function (_a) {
     var theme = _a.theme;
     return theme.colors.primary;
@@ -1475,7 +1486,7 @@ var Slider = function (_a) {
             React.createElement(BarBackground, null),
             React.createElement(BarProgress, { isCurrentValueMaxValue: isCurrentValueMaxValue, progress: progressPercentage }),
             React.createElement(StyledInput, { type: "range", min: min, max: max, value: value, onChange: handleChange, isCurrentValueMaxValue: isCurrentValueMaxValue })),
-        valueLabel && React.createElement(SliderLabel, { progress: labelOffset }, valueLabel)));
+        valueLabel && (React.createElement(SliderLabel, { progress: labelOffset }, valueLabel))));
 };
 
 var animation = {
@@ -1494,10 +1505,10 @@ var Root = styled.div(templateObject_3$6 || (templateObject_3$6 = __makeTemplate
     return theme.colors.backgroundDisabled;
 }, function (_a) {
     var variant$1 = _a.variant, theme = _a.theme;
-    return (variant$1 === variant.CIRCLE ? theme.radii.circle : theme.radii.small);
+    return variant$1 === variant.CIRCLE ? theme.radii.circle : theme.radii.small;
 }, layout, space);
 var Pulse = styled(Root)(templateObject_4$2 || (templateObject_4$2 = __makeTemplateObject(["\n  animation: ", " 2s infinite ease-out;\n  transform: translate3d(0, 0, 0);\n"], ["\n  animation: ", " 2s infinite ease-out;\n  transform: translate3d(0, 0, 0);\n"])), pulse);
-var Waves = styled(Root)(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  position: relative;\n  overflow: hidden;\n  transform: translate3d(0, 0, 0);\n  &:before {\n    content: \"\";\n    position: absolute;\n    background-image: linear-gradient(90deg, transparent, rgba(243, 243, 243, 0.5), transparent);\n    top: 0;\n    left: -150px;\n    height: 100%;\n    width: 150px;\n    animation: ", " 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n  }\n"], ["\n  position: relative;\n  overflow: hidden;\n  transform: translate3d(0, 0, 0);\n  &:before {\n    content: \"\";\n    position: absolute;\n    background-image: linear-gradient(90deg, transparent, rgba(243, 243, 243, 0.5), transparent);\n    top: 0;\n    left: -150px;\n    height: 100%;\n    width: 150px;\n    animation: ", " 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n  }\n"])), waves);
+var Waves = styled(Root)(templateObject_5$1 || (templateObject_5$1 = __makeTemplateObject(["\n  position: relative;\n  overflow: hidden;\n  transform: translate3d(0, 0, 0);\n  &:before {\n    content: \"\";\n    position: absolute;\n    background-image: linear-gradient(\n      90deg,\n      transparent,\n      rgba(243, 243, 243, 0.5),\n      transparent\n    );\n    top: 0;\n    left: -150px;\n    height: 100%;\n    width: 150px;\n    animation: ", " 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n  }\n"], ["\n  position: relative;\n  overflow: hidden;\n  transform: translate3d(0, 0, 0);\n  &:before {\n    content: \"\";\n    position: absolute;\n    background-image: linear-gradient(\n      90deg,\n      transparent,\n      rgba(243, 243, 243, 0.5),\n      transparent\n    );\n    top: 0;\n    left: -150px;\n    height: 100%;\n    width: 150px;\n    animation: ", " 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;\n  }\n"])), waves);
 var Skeleton = function (_a) {
     var _b = _a.variant, variant$1 = _b === void 0 ? variant.RECT : _b, _c = _a.animation, animation$1 = _c === void 0 ? animation.PULSE : _c, props = __rest(_a, ["variant", "animation"]);
     if (animation$1 === animation.WAVES) {
@@ -1527,10 +1538,12 @@ var scaleKeyValues = {
         toggleWidth: "72px",
     },
 };
-var getScale = function (property) { return function (_a) {
-    var _b = _a.scale, scale = _b === void 0 ? scales$4.MD : _b;
-    return scaleKeyValues[scale][property];
-}; };
+var getScale = function (property) {
+    return function (_a) {
+        var _b = _a.scale, scale = _b === void 0 ? scales$4.MD : _b;
+        return scaleKeyValues[scale][property];
+    };
+};
 var Handle = styled.div(templateObject_1$i || (templateObject_1$i = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 50%;\n  cursor: pointer;\n  height: ", ";\n  left: ", ";\n  position: absolute;\n  top: ", ";\n  transition: left 200ms ease-in;\n  width: ", ";\n  z-index: 1;\n"], ["\n  background-color: ", ";\n  border-radius: 50%;\n  cursor: pointer;\n  height: ", ";\n  left: ", ";\n  position: absolute;\n  top: ", ";\n  transition: left 200ms ease-in;\n  width: ", ";\n  z-index: 1;\n"])), function (_a) {
     var theme = _a.theme;
     return theme.toggle.handleBackground;
@@ -1567,28 +1580,32 @@ Toggle.defaultProps = {
     scale: scales.MD,
 };
 
-var byTextAscending = function (getTextProperty) { return function (objectA, objectB) {
-    var upperA = getTextProperty(objectA).toUpperCase();
-    var upperB = getTextProperty(objectB).toUpperCase();
-    if (upperA < upperB) {
-        return -1;
-    }
-    if (upperA > upperB) {
-        return 1;
-    }
-    return 0;
-}; };
-var byTextDescending = function (getTextProperty) { return function (objectA, objectB) {
-    var upperA = getTextProperty(objectA).toUpperCase();
-    var upperB = getTextProperty(objectB).toUpperCase();
-    if (upperA > upperB) {
-        return -1;
-    }
-    if (upperA < upperB) {
-        return 1;
-    }
-    return 0;
-}; };
+var byTextAscending = function (getTextProperty) {
+    return function (objectA, objectB) {
+        var upperA = getTextProperty(objectA).toUpperCase();
+        var upperB = getTextProperty(objectB).toUpperCase();
+        if (upperA < upperB) {
+            return -1;
+        }
+        if (upperA > upperB) {
+            return 1;
+        }
+        return 0;
+    };
+};
+var byTextDescending = function (getTextProperty) {
+    return function (objectA, objectB) {
+        var upperA = getTextProperty(objectA).toUpperCase();
+        var upperB = getTextProperty(objectB).toUpperCase();
+        if (upperA > upperB) {
+            return -1;
+        }
+        if (upperA < upperB) {
+            return 1;
+        }
+        return 0;
+    };
+};
 
 var sortByColumn = function (data, sortColumn, columns) {
     var isAscending = null;
@@ -1598,7 +1615,9 @@ var sortByColumn = function (data, sortColumn, columns) {
         if (sortColumn === column.name) {
             isAscending = column.sorted.asc;
             if (column.sort) {
-                sortedRows = isAscending ? data.sort(column.sort) : data.sort(column.sort).reverse();
+                sortedRows = isAscending
+                    ? data.sort(column.sort)
+                    : data.sort(column.sort).reverse();
                 // default to sort by string
             }
             else {
@@ -1630,151 +1649,158 @@ var getColumnsByName = function (columns) {
     });
     return columnsByName;
 };
-var createReducer = function () { return function (state, action) {
-    var rows = [];
-    var nextPage = 0;
-    var prevPage = 0;
-    var isAscending = null;
-    var sortedRows = [];
-    var columnCopy = [];
-    var filteredRows = [];
-    var selectedRowsById = {};
-    var stateCopy = __assign({}, state);
-    var rowIds = {};
-    switch (action.type) {
-        case "SET_ROWS":
-            rows = __spreadArray([], action.data, true);
-            // preserve sorting if a sort is already enabled when data changes
-            if (state.sortColumn) {
-                rows = sortByColumn(action.data, state.sortColumn, state.columns);
-            }
-            if (state.paginationEnabled === true) {
-                rows = getPaginatedData(rows, state.pagination.perPage, state.pagination.page);
-            }
-            if (state.paginationEnabled === true) {
-                rows = getPaginatedData(rows, state.pagination.perPage, state.pagination.page);
-            }
-            columnCopy = state.columns.map(function (column) {
-                if (state.sortColumn === column.name) {
-                    return __assign(__assign({}, column), { sorted: {
-                            on: true,
-                            asc: column.sorted.asc,
-                        } });
+var createReducer = function () {
+    return function (state, action) {
+        var rows = [];
+        var nextPage = 0;
+        var prevPage = 0;
+        var isAscending = null;
+        var sortedRows = [];
+        var columnCopy = [];
+        var filteredRows = [];
+        var selectedRowsById = {};
+        var stateCopy = __assign({}, state);
+        var rowIds = {};
+        switch (action.type) {
+            case "SET_ROWS":
+                rows = __spreadArray([], action.data, true);
+                // preserve sorting if a sort is already enabled when data changes
+                if (state.sortColumn) {
+                    rows = sortByColumn(action.data, state.sortColumn, state.columns);
                 }
-                return column;
-            });
-            return __assign(__assign({}, state), { rows: rows, originalRows: action.data, columns: columnCopy });
-        case "NEXT_PAGE":
-            nextPage = state.pagination.page + 1;
-            return __assign(__assign({}, state), { rows: getPaginatedData(state.originalRows, state.pagination.perPage, nextPage), pagination: __assign(__assign({}, state.pagination), { page: nextPage, canNext: nextPage * state.pagination.perPage < state.originalRows.length, canPrev: nextPage !== 1 }) });
-        case "PREV_PAGE":
-            prevPage = state.pagination.page === 1 ? 1 : state.pagination.page - 1;
-            return __assign(__assign({}, state), { rows: getPaginatedData(state.originalRows, state.pagination.perPage, prevPage), pagination: __assign(__assign({}, state.pagination), { page: prevPage, canNext: prevPage * state.pagination.perPage < state.originalRows.length, canPrev: prevPage !== 1 }) });
-        case "TOGGLE_SORT":
-            if (!(action.columnName in state.columnsByName)) {
-                throw new Error("Invalid column, " + action.columnName + " not found");
-            }
-            // loop through all columns and set the sort parameter to off unless
-            // it's the specified column (only one column at a time for )
-            columnCopy = state.columns.map(function (column) {
-                // if the row was found
-                if (action.columnName === column.name) {
-                    if (action.isAscOverride !== undefined) {
-                        // force the sort order
-                        isAscending = action.isAscOverride;
-                    }
-                    else {
-                        // if it's undefined, start by setting to ascending, otherwise toggle
-                        isAscending = column.sorted.asc === undefined ? true : !column.sorted.asc;
-                    }
-                    if (column.sort) {
-                        sortedRows = isAscending ? state.rows.sort(column.sort) : state.rows.sort(column.sort).reverse();
-                        // default to sort by string
-                    }
-                    else {
-                        sortedRows = isAscending
-                            ? state.rows.sort(byTextAscending(function (object) { return object.original[action.columnName]; }))
-                            : state.rows.sort(byTextDescending(function (object) { return object.original[action.columnName]; }));
-                    }
-                    return __assign(__assign({}, column), { sorted: {
-                            on: true,
-                            asc: isAscending,
-                        } });
+                if (state.paginationEnabled === true) {
+                    rows = getPaginatedData(rows, state.pagination.perPage, state.pagination.page);
                 }
-                // set sorting to false for all other columns
-                return __assign(__assign({}, column), { sorted: {
-                        on: false,
-                        asc: false,
-                    } });
-            });
-            return __assign(__assign({}, state), { columns: columnCopy, rows: sortedRows, sortColumn: action.columnName, columnsByName: getColumnsByName(columnCopy) });
-        case "GLOBAL_FILTER":
-            filteredRows = action.filter(state.originalRows);
-            selectedRowsById = {};
-            state.selectedRows.forEach(function (row) {
-                var _a;
-                selectedRowsById[row.id] = (_a = row.selected) !== null && _a !== void 0 ? _a : false;
-            });
-            return __assign(__assign({}, state), { rows: filteredRows.map(function (row) {
-                    return selectedRowsById[row.id] ? __assign(__assign({}, row), { selected: selectedRowsById[row.id] }) : __assign({}, row);
-                }), filterOn: true });
-        case "SELECT_ROW":
-            stateCopy = __assign({}, state);
-            stateCopy.rows = stateCopy.rows.map(function (row) {
-                var newRow = __assign({}, row);
-                if (newRow.id === action.rowId) {
-                    newRow.selected = !newRow.selected;
+                if (state.paginationEnabled === true) {
+                    rows = getPaginatedData(rows, state.pagination.perPage, state.pagination.page);
                 }
-                return newRow;
-            });
-            stateCopy.originalRows = stateCopy.originalRows.map(function (row) {
-                var newRow = __assign({}, row);
-                if (newRow.id === action.rowId) {
-                    newRow.selected = !newRow.selected;
-                }
-                return newRow;
-            });
-            stateCopy.selectedRows = stateCopy.originalRows.filter(function (row) { return row.selected === true; });
-            stateCopy.toggleAllState =
-                stateCopy.selectedRows.length === stateCopy.rows.length
-                    ? (stateCopy.toggleAllState = true)
-                    : (stateCopy.toggleAllState = false);
-            return stateCopy;
-        case "SEARCH_STRING":
-            stateCopy = __assign({}, state);
-            stateCopy.rows = stateCopy.originalRows.filter(function (row) {
-                return (row.cells.filter(function (cell) {
-                    if (cell.value.includes(action.searchString)) {
-                        return true;
+                columnCopy = state.columns.map(function (column) {
+                    if (state.sortColumn === column.name) {
+                        return __assign(__assign({}, column), { sorted: {
+                                on: true,
+                                asc: column.sorted.asc,
+                            } });
                     }
-                    return false;
-                }).length > 0);
-            });
-            return stateCopy;
-        case "TOGGLE_ALL":
-            if (state.selectedRows.length < state.rows.length) {
-                stateCopy.rows = stateCopy.rows.map(function (row) {
-                    rowIds[row.id] = true;
-                    return __assign(__assign({}, row), { selected: true });
+                    return column;
                 });
-                stateCopy.toggleAllState = true;
-            }
-            else {
-                stateCopy.rows = stateCopy.rows.map(function (row) {
-                    rowIds[row.id] = false;
-                    return __assign(__assign({}, row), { selected: false });
+                return __assign(__assign({}, state), { rows: rows, originalRows: action.data, columns: columnCopy });
+            case "NEXT_PAGE":
+                nextPage = state.pagination.page + 1;
+                return __assign(__assign({}, state), { rows: getPaginatedData(state.originalRows, state.pagination.perPage, nextPage), pagination: __assign(__assign({}, state.pagination), { page: nextPage, canNext: nextPage * state.pagination.perPage < state.originalRows.length, canPrev: nextPage !== 1 }) });
+            case "PREV_PAGE":
+                prevPage = state.pagination.page === 1 ? 1 : state.pagination.page - 1;
+                return __assign(__assign({}, state), { rows: getPaginatedData(state.originalRows, state.pagination.perPage, prevPage), pagination: __assign(__assign({}, state.pagination), { page: prevPage, canNext: prevPage * state.pagination.perPage < state.originalRows.length, canPrev: prevPage !== 1 }) });
+            case "TOGGLE_SORT":
+                if (!(action.columnName in state.columnsByName)) {
+                    throw new Error("Invalid column, " + action.columnName + " not found");
+                }
+                // loop through all columns and set the sort parameter to off unless
+                // it's the specified column (only one column at a time for )
+                columnCopy = state.columns.map(function (column) {
+                    // if the row was found
+                    if (action.columnName === column.name) {
+                        if (action.isAscOverride !== undefined) {
+                            // force the sort order
+                            isAscending = action.isAscOverride;
+                        }
+                        else {
+                            // if it's undefined, start by setting to ascending, otherwise toggle
+                            isAscending =
+                                column.sorted.asc === undefined ? true : !column.sorted.asc;
+                        }
+                        if (column.sort) {
+                            sortedRows = isAscending
+                                ? state.rows.sort(column.sort)
+                                : state.rows.sort(column.sort).reverse();
+                            // default to sort by string
+                        }
+                        else {
+                            sortedRows = isAscending
+                                ? state.rows.sort(byTextAscending(function (object) { return object.original[action.columnName]; }))
+                                : state.rows.sort(byTextDescending(function (object) { return object.original[action.columnName]; }));
+                        }
+                        return __assign(__assign({}, column), { sorted: {
+                                on: true,
+                                asc: isAscending,
+                            } });
+                    }
+                    // set sorting to false for all other columns
+                    return __assign(__assign({}, column), { sorted: {
+                            on: false,
+                            asc: false,
+                        } });
                 });
-                stateCopy.toggleAllState = false;
-            }
-            stateCopy.originalRows = stateCopy.originalRows.map(function (row) {
-                return row.id in rowIds ? __assign(__assign({}, row), { selected: rowIds[row.id] }) : __assign({}, row);
-            });
-            stateCopy.selectedRows = stateCopy.originalRows.filter(function (row) { return row.selected; });
-            return stateCopy;
-        default:
-            throw new Error("Invalid reducer action");
-    }
-}; };
+                return __assign(__assign({}, state), { columns: columnCopy, rows: sortedRows, sortColumn: action.columnName, columnsByName: getColumnsByName(columnCopy) });
+            case "GLOBAL_FILTER":
+                filteredRows = action.filter(state.originalRows);
+                selectedRowsById = {};
+                state.selectedRows.forEach(function (row) {
+                    var _a;
+                    selectedRowsById[row.id] = (_a = row.selected) !== null && _a !== void 0 ? _a : false;
+                });
+                return __assign(__assign({}, state), { rows: filteredRows.map(function (row) {
+                        return selectedRowsById[row.id]
+                            ? __assign(__assign({}, row), { selected: selectedRowsById[row.id] }) : __assign({}, row);
+                    }), filterOn: true });
+            case "SELECT_ROW":
+                stateCopy = __assign({}, state);
+                stateCopy.rows = stateCopy.rows.map(function (row) {
+                    var newRow = __assign({}, row);
+                    if (newRow.id === action.rowId) {
+                        newRow.selected = !newRow.selected;
+                    }
+                    return newRow;
+                });
+                stateCopy.originalRows = stateCopy.originalRows.map(function (row) {
+                    var newRow = __assign({}, row);
+                    if (newRow.id === action.rowId) {
+                        newRow.selected = !newRow.selected;
+                    }
+                    return newRow;
+                });
+                stateCopy.selectedRows = stateCopy.originalRows.filter(function (row) { return row.selected === true; });
+                stateCopy.toggleAllState =
+                    stateCopy.selectedRows.length === stateCopy.rows.length
+                        ? (stateCopy.toggleAllState = true)
+                        : (stateCopy.toggleAllState = false);
+                return stateCopy;
+            case "SEARCH_STRING":
+                stateCopy = __assign({}, state);
+                stateCopy.rows = stateCopy.originalRows.filter(function (row) {
+                    return (row.cells.filter(function (cell) {
+                        if (cell.value.includes(action.searchString)) {
+                            return true;
+                        }
+                        return false;
+                    }).length > 0);
+                });
+                return stateCopy;
+            case "TOGGLE_ALL":
+                if (state.selectedRows.length < state.rows.length) {
+                    stateCopy.rows = stateCopy.rows.map(function (row) {
+                        rowIds[row.id] = true;
+                        return __assign(__assign({}, row), { selected: true });
+                    });
+                    stateCopy.toggleAllState = true;
+                }
+                else {
+                    stateCopy.rows = stateCopy.rows.map(function (row) {
+                        rowIds[row.id] = false;
+                        return __assign(__assign({}, row), { selected: false });
+                    });
+                    stateCopy.toggleAllState = false;
+                }
+                stateCopy.originalRows = stateCopy.originalRows.map(function (row) {
+                    return row.id in rowIds
+                        ? __assign(__assign({}, row), { selected: rowIds[row.id] }) : __assign({}, row);
+                });
+                stateCopy.selectedRows = stateCopy.originalRows.filter(function (row) { return row.selected; });
+                return stateCopy;
+            default:
+                throw new Error("Invalid reducer action");
+        }
+    };
+};
 var sortDataInOrder = function (data, columns) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.map(function (row) {
@@ -1883,7 +1909,9 @@ var useTable = function (columns, data, options) {
         toggleSort: function (columnName, isAscOverride) {
             return dispatch({ type: "TOGGLE_SORT", columnName: columnName, isAscOverride: isAscOverride });
         },
-        setSearchString: function (searchString) { return dispatch({ type: "SEARCH_STRING", searchString: searchString }); },
+        setSearchString: function (searchString) {
+            return dispatch({ type: "SEARCH_STRING", searchString: searchString });
+        },
         pagination: state.pagination,
         toggleAllState: state.toggleAllState,
     };
@@ -1955,7 +1983,9 @@ var mediaQueries = (function () {
         return __assign(__assign({}, accum), (_b = {}, _b[size] = "(min-width: " + minWidth + "px) and (max-width: " + breakpoint + "px)", _b));
     }, {});
 })();
-var getKey = function (size) { return "is" + size.charAt(0).toUpperCase() + size.slice(1); };
+var getKey = function (size) {
+    return "is" + size.charAt(0).toUpperCase() + size.slice(1);
+};
 var useMatchBreakpoints = function () {
     var _a = useState(function () {
         return Object.keys(mediaQueries).reduce(function (accum, size) {
@@ -2129,7 +2159,7 @@ var useKonamiCheatCode = function (matchedCodeHandler) {
     }, [matchedCodeHandler]);
 };
 
-var StyledModal = styled.div(templateObject_1$h || (templateObject_1$h = __makeTemplateObject(["\n  background: ", ";\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);\n  border: 1px solid ", ";\n  border-radius: 32px;\n  width: 100%;\n  z-index: ", ";\n  overflow-y: auto;\n  ", " {\n    width: auto;\n    min-width: 360px;\n    max-width: 100%;\n  }\n"], ["\n  background: ", ";\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);\n  border: 1px solid ", ";\n  border-radius: 32px;\n  width: 100%;\n  z-index: ", ";\n  overflow-y: auto;\n  ", " {\n    width: auto;\n    min-width: 360px;\n    max-width: 100%;\n  }\n"])), function (_a) {
+var StyledModal = styled.div(templateObject_1$h || (templateObject_1$h = __makeTemplateObject(["\n  background: ", ";\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1),\n    0px 1px 1px rgba(0, 0, 0, 0.05);\n  border: 1px solid ", ";\n  border-radius: 32px;\n  width: 100%;\n  z-index: ", ";\n  overflow-y: auto;\n  ", " {\n    width: auto;\n    min-width: 360px;\n    max-width: 100%;\n  }\n"], ["\n  background: ", ";\n  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1),\n    0px 1px 1px rgba(0, 0, 0, 0.05);\n  border: 1px solid ", ";\n  border-radius: 32px;\n  width: 100%;\n  z-index: ", ";\n  overflow-y: auto;\n  ", " {\n    width: auto;\n    min-width: 360px;\n    max-width: 100%;\n  }\n"])), function (_a) {
     var theme = _a.theme;
     return theme.modal.background;
 }, function (_a) {
@@ -2235,7 +2265,7 @@ var Icon$n = function (props) {
         React.createElement("path", { "data-name": "layer1", d: "M31.4 57.8l-3.8 3.8a30.2 30.2 0 0 0 4.4.4l3.4-.2zm27.7-15.1l-6.2-6.2-7.9 7.9 8.5 8.6a30 30 0 0 0 6.4-9.8zM45 23l7.8 7.8 7-7 .8-.5A29.9 29.9 0 0 0 55 12.9zM31.4 9.4l6.8-6.8a30.1 30.1 0 0 0-13.3.2z", fill: "#EC9333" }),
         React.createElement("path", { "data-name": "layer2", fill: "#EC9333", d: "M12.918 33.622l7.778-7.778 7.927 7.926-7.779 7.778z" }),
         React.createElement("path", { "data-name": "layer1", fill: "#EC9333", d: "M23.547 22.96l7.92-7.92 7.926 7.927-7.92 7.92zM18 44.4l-8-8-5.4 5.5-.8.5a30 30 0 0 0 6.1 10zm5.55-.078l7.778-7.778 7.806 7.806-7.778 7.778z" }),
-        "   "));
+        " "));
 };
 
 var Icon$m = function (props) {
@@ -2272,7 +2302,7 @@ var Icon$g = function (props) {
     return (React.createElement(Svg, __assign({ viewBox: "0 0 64 64" }, props),
         React.createElement("path", { "data-name": "layer2", d: "M59 60h-2V20h-8v40h-6V30h-8v30h-6V40h-8v20h-6V50H7v10H5a2 2 0 0 0 0 4h54a2 2 0 0 0 0-4z", fill: "#EC9333" }),
         React.createElement("path", { "data-name": "layer1", d: "M8 44a2 2 0 0 0 1.2-.4L53.6 8.5l-.5 5.3a2 2 0 0 0 1.8 2.2h.2a2 2 0 0 0 2-1.8l1.1-11.8L46.4 0a2 2 0 1 0-.8 4l5.8 1.2L6.8 40.4A2 2 0 0 0 8 44z", fill: "#EC9333" }),
-        "  "));
+        " "));
 };
 
 var Logo$2 = function (_a) {
@@ -2302,7 +2332,7 @@ var Icon$f = function (props) {
     return (React.createElement(Svg, __assign({ viewBox: "0 0 80 80" }, props),
         React.createElement("path", { "data-name": "layer2", d: "M32 0a32.021 32.021 0 0 0-10.1 62.4c1.6.3 2.2-.7 2.2-1.5v-6c-8.9 1.9-10.8-3.8-10.8-3.8-1.5-3.7-3.6-4.7-3.6-4.7-2.9-2 .2-1.9.2-1.9 3.2.2 4.9 3.3 4.9 3.3 2.9 4.9 7.5 3.5 9.3 2.7a6.93 6.93 0 0 1 2-4.3c-7.1-.8-14.6-3.6-14.6-15.8a12.27 12.27 0 0 1 3.3-8.6 11.965 11.965 0 0 1 .3-8.5s2.7-.9 8.8 3.3a30.873 30.873 0 0 1 8-1.1 30.292 30.292 0 0 1 8 1.1c6.1-4.1 8.8-3.3 8.8-3.3a11.965 11.965 0 0 1 .3 8.5 12.1 12.1 0 0 1 3.3 8.6c0 12.3-7.5 15-14.6 15.8a7.746 7.746 0 0 1 2.2 5.9v8.8c0 .9.6 1.8 2.2 1.5A32.021 32.021 0 0 0 32 0z", fill: "#b05e0f" }),
         React.createElement("path", { "data-name": "layer1", d: "M12.1 45.9c-.1.2-.3.2-.5.1s-.4-.3-.3-.5.3-.2.6-.1c.2.2.3.4.2.5zm1.3 1.5a.589.589 0 0 1-.8-.8.631.631 0 0 1 .7.1.494.494 0 0 1 .1.7zm1.3 1.8a.585.585 0 0 1-.7-.3.6.6 0 0 1 0-.8.585.585 0 0 1 .7.3c.2.3.2.7 0 .8zm1.7 1.8c-.2.2-.5.1-.8-.1-.3-.3-.4-.6-.2-.8a.619.619 0 0 1 .8.1.554.554 0 0 1 .2.8zm2.4 1c-.1.3-.4.4-.8.3s-.6-.4-.5-.7.4-.4.8-.3c.3.2.6.5.5.7zm2.6.2c0 .3-.3.5-.7.5s-.7-.2-.7-.5.3-.5.7-.5c.4.1.7.3.7.5zm2.4-.4q0 .45-.6.6a.691.691 0 0 1-.8-.3q0-.45.6-.6c.5-.1.8.1.8.3z", fill: "#b05e0f" }),
-        "    "));
+        " "));
 };
 
 var Icon$e = function (props) {
@@ -2384,9 +2414,9 @@ var StyledLink = styled(Link$1)(templateObject_1$d || (templateObject_1$d = __ma
     var theme = _a.theme;
     return theme.mediaQueries.nav;
 });
-var StyledImage$1 = styled.img(templateObject_2$8 || (templateObject_2$8 = __makeTemplateObject(["\n    height:100%;\n"], ["\n    height:100%;\n"])));
-var StyledFlex = styled(Flex)(templateObject_3$3 || (templateObject_3$3 = __makeTemplateObject(["\ndisplay: flex;\nalign-items: center;\n"], ["\ndisplay: flex;\nalign-items: center;\n"])));
-var StyledImage2 = styled.img(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n    height:32px;\n    width:32px\n"], ["\n    height:32px;\n    width:32px\n"])));
+var StyledImage$1 = styled.img(templateObject_2$8 || (templateObject_2$8 = __makeTemplateObject(["\n  height: 100%;\n"], ["\n  height: 100%;\n"])));
+var StyledFlex = styled(Flex)(templateObject_3$3 || (templateObject_3$3 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n"], ["\n  display: flex;\n  align-items: center;\n"])));
+var StyledImage2 = styled.img(templateObject_4$1 || (templateObject_4$1 = __makeTemplateObject(["\n  height: 32px;\n  width: 32px;\n"], ["\n  height: 32px;\n  width: 32px;\n"])));
 var Logo = function (_a) {
     var isPushed = _a.isPushed, togglePush = _a.togglePush; _a.isDark; var href = _a.href;
     var isAbsoluteUrl = href.startsWith("http");
@@ -2395,9 +2425,11 @@ var Logo = function (_a) {
         React.createElement(StyledImage2, { className: "mobile-icon", src: "/images/swafel.png" })));
     return (React.createElement(StyledFlex, null,
         React.createElement(MenuButton, { "aria-label": "Toggle menu", onClick: togglePush, mr: "0px" },
-            " \u00A0",
+            " ",
+            "\u00A0",
             isPushed ? (React.createElement(Icon$k, { width: "36px", color: "text" })) : (React.createElement(Icon$l, { width: "36px", color: "text" }))),
-        " \u00A0\u00A0\u00A0",
+        " ",
+        "\u00A0\u00A0\u00A0",
         isAbsoluteUrl ? (React.createElement(StyledLink, { as: "a", href: href, "aria-label": "Pancake home page" }, innerLogo)) : (React.createElement(StyledLink, { to: href, "aria-label": "Pancake home page" }, innerLogo))));
 };
 var Logo$1 = React.memo(Logo, function (prev, next) { return prev.isPushed === next.isPushed && prev.isDark === next.isDark; });
@@ -2490,7 +2522,7 @@ var socials = [
             {
                 label: "English Chat",
                 href: "https://t.me/StroopWafelChat",
-            }
+            },
         ],
     },
     {
@@ -2512,7 +2544,7 @@ var SIDEBAR_WIDTH_REDUCED = 56;
 var rainbowAnimation = keyframes(templateObject_1$c || (templateObject_1$c = __makeTemplateObject(["\n  0%,\n  100% {\n    background-position: 0 0;\n  }\n  50% {\n    background-position: 100% 0;\n  }\n"], ["\n  0%,\n  100% {\n    background-position: 0 0;\n  }\n  50% {\n    background-position: 100% 0;\n  }\n"])));
 var LinkLabel = styled.div(templateObject_2$7 || (templateObject_2$7 = __makeTemplateObject(["\n  color: ", ";\n  transition: color 0.4s;\n  flex-grow: 1;\n"], ["\n  color: ", ";\n  transition: color 0.4s;\n  flex-grow: 1;\n"])), function (_a) {
     var isPushed = _a.isPushed, theme = _a.theme;
-    return (isPushed ? theme.colors.text : "transparent");
+    return isPushed ? theme.colors.text : "transparent";
 });
 var MenuEntry = styled.div(templateObject_3$2 || (templateObject_3$2 = __makeTemplateObject(["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  height: ", "px;\n  padding: ", ";\n  font-size: ", ";\n  background-color: ", ";\n  color: ", ";\n  box-shadow: ", ";\n\n  a {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 100%;\n  }\n\n  svg {\n    fill: ", ";\n  }\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  // Safari fix\n  flex-shrink: 0;\n\n  &.rainbow {\n    background-clip: text;\n    animation: ", " 3s ease-in-out infinite;\n    background: ", ";\n    background-size: 400% 100%;\n  }\n"], ["\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  height: ", "px;\n  padding: ", ";\n  font-size: ", ";\n  background-color: ", ";\n  color: ", ";\n  box-shadow: ", ";\n\n  a {\n    display: flex;\n    align-items: center;\n    width: 100%;\n    height: 100%;\n  }\n\n  svg {\n    fill: ", ";\n  }\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  // Safari fix\n  flex-shrink: 0;\n\n  &.rainbow {\n    background-clip: text;\n    animation: ", " 3s ease-in-out infinite;\n    background: ", ";\n    background-size: 400% 100%;\n  }\n"])), MENU_ENTRY_HEIGHT, function (_a) {
     var secondary = _a.secondary;
@@ -2522,13 +2554,13 @@ var MenuEntry = styled.div(templateObject_3$2 || (templateObject_3$2 = __makeTem
     return (secondary ? "14px" : "16px");
 }, function (_a) {
     var secondary = _a.secondary, theme = _a.theme;
-    return (secondary ? theme.colors.background : "transparent");
+    return secondary ? theme.colors.background : "transparent";
 }, function (_a) {
     var theme = _a.theme;
     return theme.colors.textSubtle;
 }, function (_a) {
     var isActive = _a.isActive, theme = _a.theme;
-    return (isActive ? "inset 4px 0px 0px " + theme.colors.primary : "none");
+    return isActive ? "inset 4px 0px 0px " + theme.colors.primary : "none";
 }, function (_a) {
     var theme = _a.theme;
     return theme.colors.textSubtle;
@@ -2553,7 +2585,7 @@ var AccordionContent = styled.div(templateObject_2$6 || (templateObject_2$6 = __
     return (isOpen ? maxHeight + "px" : 0);
 }, function (_a) {
     var isOpen = _a.isOpen, isPushed = _a.isPushed;
-    return (isOpen && isPushed ? "rgba(133, 133, 133, 0.1)" : "transparent");
+    return isOpen && isPushed ? "rgba(133, 133, 133, 0.1)" : "transparent";
 });
 var Accordion = function (_a) {
     var label = _a.label, icon = _a.icon, isPushed = _a.isPushed, pushNav = _a.pushNav, _b = _a.initialOpenState, initialOpenState = _b === void 0 ? false : _b, children = _a.children, className = _a.className, isActive = _a.isActive;
@@ -2596,10 +2628,14 @@ var PanelBody = function (_a) {
     return (React.createElement(Container$1, null, links.map(function (entry) {
         var Icon = Icons$1[entry.icon];
         var iconElement = React.createElement(Icon, { width: "24px", mr: "8px" });
-        var calloutClass = entry.calloutClass ? entry.calloutClass : undefined;
+        var calloutClass = entry.calloutClass
+            ? entry.calloutClass
+            : undefined;
         if (entry.items) {
             var itemsMatchIndex = entry.items.findIndex(function (item) { return item.href === location.pathname; });
-            var initialOpenState = entry.initialOpenState === true ? entry.initialOpenState : itemsMatchIndex >= 0;
+            var initialOpenState = entry.initialOpenState === true
+                ? entry.initialOpenState
+                : itemsMatchIndex >= 0;
             return (React.createElement(Accordion$1, { key: entry.label, isPushed: isPushed, pushNav: pushNav, icon: iconElement, label: entry.label, initialOpenState: initialOpenState, className: calloutClass, isActive: entry.items.some(function (item) { return item.href === location.pathname; }) }, isPushed &&
                 entry.items.map(function (item) { return (React.createElement(MenuEntry, { key: item.href, secondary: true, isActive: item.href === location.pathname, onClick: handleClick },
                     React.createElement(MenuLink, { href: item.href }, item.label))); })));
@@ -2616,7 +2652,7 @@ var PriceLink = styled.a(templateObject_1$9 || (templateObject_1$9 = __makeTempl
 var StyledImage = styled.img(templateObject_2$5 || (templateObject_2$5 = __makeTemplateObject(["\n  width: 24px;\n  height: 24px;\n"], ["\n  width: 24px;\n  height: 24px;\n"])));
 var CakePrice = function (_a) {
     var cakePriceUsd = _a.cakePriceUsd;
-    return cakePriceUsd ? (React.createElement(PriceLink, { href: "https://bscscan.com/token/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82", target: "_blank" },
+    return cakePriceUsd ? (React.createElement(PriceLink, { href: "https://bscscan.com/token/0x5D39953964E141C4ffc78149280C65347ab80DdC", target: "_blank" },
         React.createElement(StyledImage, { src: "/images/swafel.png" }),
         " \u00A0",
         React.createElement(Text, { color: "#b05e0f", bold: true }, "$" + cakePriceUsd.toFixed(3)))) : (React.createElement(Skeleton, { width: 80, height: 24 }));
@@ -2627,7 +2663,11 @@ var templateObject_1$9, templateObject_2$5;
 var Icons = IconModule;
 var SocialLinks = function () { return (React.createElement(Flex, null, socials.map(function (social, index) {
     var Icon = Icons[social.icon];
-    var iconProps = { width: "24px", color: "#b05e0f", style: { cursor: "pointer" } };
+    var iconProps = {
+        width: "24px",
+        color: "#b05e0f",
+        style: { cursor: "pointer" },
+    };
     var mr = index < socials.length - 1 ? "8px" : 0;
     if (social.items) {
         return (React.createElement(Dropdown, { key: social.label, position: "top", target: React.createElement(Icon, __assign({}, iconProps, { mr: mr })) }, social.items.map(function (item) { return (React.createElement(Link, { external: true, key: item.label, href: item.href, "aria-label": item.label, color: "textSubtle" }, item.label)); })));
@@ -2637,7 +2677,7 @@ var SocialLinks = function () { return (React.createElement(Flex, null, socials.
 }))); };
 var SocialLinks$1 = React.memo(SocialLinks, function () { return true; });
 
-var Container = styled.div(templateObject_1$8 || (templateObject_1$8 = __makeTemplateObject(["\n  flex: none;\n  padding: 8px 4px;\n  background-color: #FFEACC;\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"], ["\n  flex: none;\n  padding: 8px 4px;\n  background-color: #FFEACC;\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"])));
+var Container = styled.div(templateObject_1$8 || (templateObject_1$8 = __makeTemplateObject(["\n  flex: none;\n  padding: 8px 4px;\n  background-color: #ffeacc;\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"], ["\n  flex: none;\n  padding: 8px 4px;\n  background-color: #ffeacc;\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"])));
 styled.div(templateObject_2$4 || (templateObject_2$4 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: ", "px;\n  padding: 0 8px;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: ", "px;\n  padding: 0 8px;\n"])), MENU_ENTRY_HEIGHT);
 var SocialEntry = styled.div(templateObject_3$1 || (templateObject_3$1 = __makeTemplateObject(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: ", "px;\n  padding: 0 16px;\n"], ["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  height: ", "px;\n  padding: 0 16px;\n"])), MENU_ENTRY_HEIGHT);
 var PanelFooter = function (_a) {
@@ -2654,7 +2694,7 @@ var PanelFooter = function (_a) {
 };
 var templateObject_1$8, templateObject_2$4, templateObject_3$1;
 
-var StyledPanel = styled.div(templateObject_1$7 || (templateObject_1$7 = __makeTemplateObject(["\n  position: fixed;\n  padding-top: ", ";\n  top: 0;\n  left: 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  flex-shrink: 0;\n  background-color: ", ";\n  width: ", ";\n  height: 100vh;\n  transition: padding-top 0.2s, width 0.2s;\n  border-right: ", ";\n  z-index: 11;\n  overflow: ", ";\n  transform: translate3d(0, 0, 0);\n  background-position: 0px 50px;\n  background-repeat: repeat-x;\n  background-size: auto 60px;\n  background-color: #FFEACC;\n\n  ", " {\n    border-right: 2px solid rgba(133, 133, 133, 0.1);\n    width: ", ";\n  }\n"], ["\n  position: fixed;\n  padding-top: ", ";\n  top: 0;\n  left: 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  flex-shrink: 0;\n  background-color: ", ";\n  width: ", ";\n  height: 100vh;\n  transition: padding-top 0.2s, width 0.2s;\n  border-right: ", ";\n  z-index: 11;\n  overflow: ", ";\n  transform: translate3d(0, 0, 0);\n  background-position: 0px 50px;\n  background-repeat: repeat-x;\n  background-size: auto 60px;\n  background-color: #FFEACC;\n\n  ", " {\n    border-right: 2px solid rgba(133, 133, 133, 0.1);\n    width: ", ";\n  }\n"])), function (_a) {
+var StyledPanel = styled.div(templateObject_1$7 || (templateObject_1$7 = __makeTemplateObject(["\n  position: fixed;\n  padding-top: ", ";\n  top: 0;\n  left: 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  flex-shrink: 0;\n  background-color: ", ";\n  width: ", ";\n  height: 100vh;\n  transition: padding-top 0.2s, width 0.2s;\n  border-right: ", ";\n  z-index: 11;\n  overflow: ", ";\n  transform: translate3d(0, 0, 0);\n  background-position: 0px 50px;\n  background-repeat: repeat-x;\n  background-size: auto 60px;\n  background-color: #ffeacc;\n\n  ", " {\n    border-right: 2px solid rgba(133, 133, 133, 0.1);\n    width: ", ";\n  }\n"], ["\n  position: fixed;\n  padding-top: ", ";\n  top: 0;\n  left: 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  flex-shrink: 0;\n  background-color: ", ";\n  width: ", ";\n  height: 100vh;\n  transition: padding-top 0.2s, width 0.2s;\n  border-right: ", ";\n  z-index: 11;\n  overflow: ", ";\n  transform: translate3d(0, 0, 0);\n  background-position: 0px 50px;\n  background-repeat: repeat-x;\n  background-size: auto 60px;\n  background-color: #ffeacc;\n\n  ", " {\n    border-right: 2px solid rgba(133, 133, 133, 0.1);\n    width: ", ";\n  }\n"])), function (_a) {
     var showMenu = _a.showMenu;
     return (showMenu ? "40px" : 0);
 }, function (_a) {
@@ -2665,7 +2705,7 @@ var StyledPanel = styled.div(templateObject_1$7 || (templateObject_1$7 = __makeT
     return (isPushed ? SIDEBAR_WIDTH_FULL + "px" : 0);
 }, function (_a) {
     var isPushed = _a.isPushed;
-    return (isPushed ? "2px solid rgba(133, 133, 133, 0.1)" : 0);
+    return isPushed ? "2px solid rgba(133, 133, 133, 0.1)" : 0;
 }, function (_a) {
     var isPushed = _a.isPushed;
     return (isPushed ? "initial" : "hidden");
@@ -2677,7 +2717,7 @@ var StyledPanel = styled.div(templateObject_1$7 || (templateObject_1$7 = __makeT
     return (isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED) + "px";
 });
 //   background-image: url("images/small-drip.gif");
-var Giffer = styled.div(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\nbackground-image: url(\"images/small-drip.gif\");\n\n"], ["\nbackground-image: url(\"images/small-drip.gif\");\n\n"])));
+var Giffer = styled.div(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n  background-image: url(\"images/small-drip.gif\");\n"], ["\n  background-image: url(\"images/small-drip.gif\");\n"])));
 var Panel = function (props) {
     var isPushed = props.isPushed, showMenu = props.showMenu;
     return (React.createElement(StyledPanel, { isPushed: isPushed, showMenu: showMenu },
@@ -2851,7 +2891,7 @@ var StyleButton = styled(Text).attrs({ role: "button" })(templateObject_1$5 || (
 });
 var Tooltip = styled.div(templateObject_2$2 || (templateObject_2$2 = __makeTemplateObject(["\n  display: ", ";\n  position: absolute;\n  bottom: -22px;\n  right: 0;\n  left: 0;\n  text-align: center;\n  background-color: ", ";\n  color: ", ";\n  border-radius: 16px;\n  opacity: 0.7;\n"], ["\n  display: ", ";\n  position: absolute;\n  bottom: -22px;\n  right: 0;\n  left: 0;\n  text-align: center;\n  background-color: ", ";\n  color: ", ";\n  border-radius: 16px;\n  opacity: 0.7;\n"])), function (_a) {
     var isTooltipDisplayed = _a.isTooltipDisplayed;
-    return (isTooltipDisplayed ? "block" : "none");
+    return isTooltipDisplayed ? "block" : "none";
 }, function (_a) {
     var theme = _a.theme;
     return theme.colors.contrast;
@@ -2880,7 +2920,12 @@ var templateObject_1$5, templateObject_2$2;
 var AccountModal = function (_a) {
     var account = _a.account, logout = _a.logout, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b;
     return (React.createElement(Modal, { title: "Your wallet", onDismiss: onDismiss },
-        React.createElement(Text, { fontSize: "20px", bold: true, style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginBottom: "8px" } }, account),
+        React.createElement(Text, { fontSize: "20px", bold: true, style: {
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                marginBottom: "8px",
+            } }, account),
         React.createElement(Flex, { mb: "32px" },
             React.createElement(LinkExternal, { small: true, href: "https://bscscan.com/address/" + account, mr: "16px" }, "View on BscScan"),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
@@ -2901,7 +2946,9 @@ var useWalletModal = function (login, logout, account) {
 var UserBlock = function (_a) {
     var account = _a.account, login = _a.login, logout = _a.logout;
     var _b = useWalletModal(login, logout, account), onPresentConnectModal = _b.onPresentConnectModal, onPresentAccountModal = _b.onPresentAccountModal;
-    var accountEllipsis = account ? account.substring(0, 4) + "..." + account.substring(account.length - 4) : null;
+    var accountEllipsis = account
+        ? account.substring(0, 4) + "..." + account.substring(account.length - 4)
+        : null;
     return (React.createElement("div", null, account ? (React.createElement(Button, { scale: "sm", variant: "tertiary", onClick: function () {
             onPresentAccountModal();
         } }, accountEllipsis)) : (React.createElement(Button, { scale: "sm", onClick: function () {
@@ -2934,7 +2981,7 @@ var Avatar = function (_a) {
 var templateObject_1$4, templateObject_2$1;
 
 var Wrapper = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  position: relative;\n  width: 100%;\n"], ["\n  position: relative;\n  width: 100%;\n"])));
-var StyledNav = styled.nav(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: fixed;\n  top: ", ";\n  left: 0;\n  transition: top 0.2s;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-left: 8px;\n  padding-right: 16px;\n  width: 100%;\n  height: ", "px;\n  background-color: ", ";\n  border-bottom: solid 2px rgba(133, 133, 133, 0.1);\n  z-index: 20;\n  transform: translate3d(0, 0, 0);\n  background-color: #FFEACC;\n"], ["\n  position: fixed;\n  top: ", ";\n  left: 0;\n  transition: top 0.2s;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-left: 8px;\n  padding-right: 16px;\n  width: 100%;\n  height: ", "px;\n  background-color: ", ";\n  border-bottom: solid 2px rgba(133, 133, 133, 0.1);\n  z-index: 20;\n  transform: translate3d(0, 0, 0);\n  background-color: #FFEACC;\n"])), function (_a) {
+var StyledNav = styled.nav(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  position: fixed;\n  top: ", ";\n  left: 0;\n  transition: top 0.2s;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-left: 8px;\n  padding-right: 16px;\n  width: 100%;\n  height: ", "px;\n  background-color: ", ";\n  border-bottom: solid 2px rgba(133, 133, 133, 0.1);\n  z-index: 20;\n  transform: translate3d(0, 0, 0);\n  background-color: #ffeacc;\n"], ["\n  position: fixed;\n  top: ", ";\n  left: 0;\n  transition: top 0.2s;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-left: 8px;\n  padding-right: 16px;\n  width: 100%;\n  height: ", "px;\n  background-color: ", ";\n  border-bottom: solid 2px rgba(133, 133, 133, 0.1);\n  z-index: 20;\n  transform: translate3d(0, 0, 0);\n  background-color: #ffeacc;\n"])), function (_a) {
     var showMenu = _a.showMenu;
     return (showMenu ? 0 : "-" + MENU_HEIGHT + "px");
 }, MENU_HEIGHT, function (_a) {
@@ -2970,7 +3017,8 @@ var Menu = function (_a) {
     useEffect(function () {
         var handleScroll = function () {
             var currentOffset = window.pageYOffset;
-            var isBottomOfPage = window.document.body.clientHeight === currentOffset + window.innerHeight;
+            var isBottomOfPage = window.document.body.clientHeight ===
+                currentOffset + window.innerHeight;
             var isTopOfPage = currentOffset === 0;
             // Always show the menu when user reach the top
             if (isTopOfPage) {

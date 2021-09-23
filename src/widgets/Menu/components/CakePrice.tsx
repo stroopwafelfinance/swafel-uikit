@@ -30,7 +30,7 @@ const StyledImage = styled.img`
 const CakePrice: React.FC<Props> = ({ cakePriceUsd }) => {
   return cakePriceUsd ? (
     <PriceLink
-      href="https://bscscan.com/token/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
+      href="https://bscscan.com/token/0x5D39953964E141C4ffc78149280C65347ab80DdC"
       target="_blank"
     >
       <StyledImage src={`/images/swafel.png`} /> &nbsp;
